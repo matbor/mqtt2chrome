@@ -14,6 +14,8 @@
 var broker = "test.mosquitto.org"; //broker websocket address
 var broker_port = 80; //broker websocket port
 var subtopic = "/test/helloworld" //topic to subscribe to
+
+var notifyTimeout = 60 //notification window timeout in seconds
 //SETTINGS END HERE
 
 function connect() {
@@ -39,7 +41,7 @@ function onConnectionLost(responseObject) {
   if (responseObject.errorCode !== 0)
     console.log("onConnectionLost:"+responseObject.errorMessage);
     chrome.browserAction.setIcon({path:"icon_noconnection.png"})
-    alert("Connection failed: " + responseObject.errorMessage);
+    alert("Connection failed, reload plugin to reconnect: " + responseObject.errorMessage);
 };
 
 function onMessageArrived(message) {
@@ -53,6 +55,7 @@ function onMessageArrived(message) {
 	  'Message: '+message.payloadString
 	);
 	notification.show();
+	setTimeout( function() { notification.cancel(); }, notifyTimeout * 1000 ); //notification window timeout
 	} else {
 	  window.webkitNotifications.requestPermission();
 	};
@@ -61,7 +64,7 @@ function onMessageArrived(message) {
 
 // Test for notification support.
 if (window.webkitNotifications) {
-
+  //if support, let's conenct to the broker
   connect();
 
 }
