@@ -1,7 +1,7 @@
 /*
   by @bordignon
   October 2013
-  You can do what you want with the code as long as you provide attribution back to me and don’t hold me liable.
+  You can do what you want with the code as long as you provide attribution back to me and donï¿½t hold me liable.
   
   An example of using the MQTT javascript library, websockets and chrome extensions.
   This extension will connect to a MQTT broker using websockets and then subscribe to a topic. 
@@ -61,7 +61,7 @@ function onMessageArrived(message) {
 
 // Test for notification support.
 if (window.webkitNotifications) {
-  // While activated, show notifications at the display frequency.
+
   connect();
 
 }
