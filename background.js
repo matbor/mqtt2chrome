@@ -67,4 +67,12 @@ if (window.webkitNotifications) {
   //if support, let's conenct to the broker
   connect();
 
-}
+};
+
+//when you click on the icon on the extension bar it will disconnect/reconnect
+chrome.browserAction.onClicked.addListener(function () {
+  console.log('we will try to disconnect and reconnect');
+  client.disconnect();
+  connect();
+});
+
