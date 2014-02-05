@@ -1,8 +1,8 @@
 {
-  "name": "MQTT Notifications",
-  "version": "1.1",
+  "name": "MQTT2Chrome Notifications",
+  "version": "4",
   "description":
-    "Oct2013 by @bordignon, an example of using the MQTT javascript library and websockets.  The extension will connect to a MQTT broker and then subscribe to a topic, when a message is received it will then display the notification using chrome's built-in notifications function.",
+    "Feb2014 by @bordignon, an example of using the MQTT javascript library and websockets.  The extension will connect to a MQTT broker and then subscribe to a topic, when a message is received it will then display the notification using chrome's built-in notifications function.",
   "icons": {"16": "icon.png", "48": "icon.png", "128": "icon.png"},
   "browser_action": {
     "default_icon": "icon_noconnection.png"

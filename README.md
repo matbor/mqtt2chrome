@@ -2,7 +2,7 @@ mqtt2chrome
 ===========
 
 by @bordignon
-Feb 2014
+October 2013
 
   You can do what you want with the code as long as you provide attribution back to me and don’t hold me liable!
   
@@ -29,22 +29,3 @@ if the connection is lost.)*
 
 *Screenshot shows where the options are to install the extension in developer mode.*
 ![example of install](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/howto%20load.png)
-
-
-##Optional;
-If you want you can send a JSON formated payload to the topic you are subscribing too, it has to be sent in this format;
-
-    { "sub": "", "txt": "", "img": ""}
-    sub = subject
-    txt = message body (NOTE: if you can put a web url in here as well!!)
-    img = imagefile location in the thumbnails directory of this extension, example try alert.png
-      
-example message to send to your broker; (clicking on the notification will open the URL in a new tab)
-
-    {"sub": "thanks for trying mqtt2chrome","txt":"Check out more at http://twitter.com/bordignon","img":"alert.png"}
-
-![message](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/message.png)
-      
-##Todo/fix;
-  * fix the notification history so you can open older ones. 
-  * add the settings to another page, so you don't have to edit this page
