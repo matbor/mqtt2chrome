@@ -11,7 +11,7 @@ Feb 2014
   This extension will connect to a MQTT broker using websockets and then subscribe to a topic. 
   When a message is received it will then display the notification using chrome's built-in notifications function.
   
-  Requires "notifications" permission.
+  Requires "notifications" permission.  Have ony tested on Windows.
 
 *Screenshot of what the notification looks like.*
 *(Note: the messagebox in bottom right and also the connection icon near the address bar, this will change color 
