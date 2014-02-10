@@ -49,7 +49,3 @@ Example:
 
 ![message](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/message.png)
 
-##Todo/fix
-
-  * fix the notification history so you can open older ones.
-  * add the settings to another page, so you don't have to edit this page
