@@ -1,7 +1,7 @@
 mqtt2chrome
 ===========
 
-by @bordignon, Feb 2014.
+by @bordignon, Feb 2014 and with help from @clawsicus
 
 You can do what you want with the code as long as you provide attribution back to me and don’t hold me liable!
 
