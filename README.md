@@ -1,50 +1,55 @@
 mqtt2chrome
 ===========
 
-by @bordignon
-Feb 2014
+by @bordignon, Feb 2014.
 
-  You can do what you want with the code as long as you provide attribution back to me and don’t hold me liable!
-  
-  This is an example of using the MQTT javascript library, websockets and chrome extensions.
-  
-  This extension will connect to a MQTT broker using websockets and then subscribe to a topic. 
-  When a message is received it will then display the notification using chrome's built-in notifications function.
-  
-  Requires "notifications" permission.  Have ony tested on Windows.
+You can do what you want with the code as long as you provide attribution back to me and don’t hold me liable!
 
-*Screenshot of what the notification looks like.*
-*(Note: the messagebox in bottom right and also the connection icon near the address bar, this will change color 
-if the connection is lost.)*
+##Overview
+
+This extension connects to a MQTT broker using websockets and displays any received messages using Chrome's built-in notifications function.
+
+Requires "notifications" permission.
+
+Tested on Windows, Linux and OSX.
+
+*Screenshot of what the notification looks like. Observe the notification box in bottom right and also the connection icon near the address bar. The connection icon will change if the connection is lost.*
 ![notification box](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/message%20recieved.png)
 
 
-##Installation;
-1. download all the files to a directory.
-2. edit the background.js file and change the three variables **broker, broker port and topic**
-3. in chrome, goto tools -> extenstions
-4. tick the 'developer mode' box, then click 'load unpacked extension'
-5. select the directory where you have download and edited the extension
-6. it should automatically connect!
+##Installation
+
+1. Download all the files to a directory.
+2. In Chrome, goto Tools -> Extenstions.
+3. Tick the 'Developer mode' box, then click 'Load unpacked extension...'
+4. Select the directory where you have downloaded the extension.
+5. The extension will automatically load and connect using the default settings.
+6. The settings page will open allowing you to change them to suit your configuration.
+7. Click Save & Close. Note: if you changed the broker, port or subtopic settings you need to click the MQTT2Chrome toolbar to trigger a reconnect.
 
 *Screenshot shows where the options are to install the extension in developer mode.*
 ![example of install](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/howto%20load.png)
 
 
-##Optional;
-If you want you can send a JSON formated payload to the topic you are subscribing too, it has to be sent in this format;
+##Optional
+
+This extension expects to receive a specific JSON formatted message payload:
 
     { "sub": "", "txt": "", "img": ""}
-    sub = subject
-    txt = message body (NOTE: if you can put a web url in here as well!!)
-    img = imagefile location in the thumbnails directory of this extension, example try alert.png
-      
-example message to send to your broker; (clicking on the notification will open the URL in a new tab)
+
+Where:
+
+  * sub - represents the notification heading used in the notification.
+  * txt - represents the text used in the notification. If you put a url in here it can be opened by clicking on the notification box.
+  * img - represents the image filename from within the thumbnails directory. For example; alert.png, warning.png, etc.
+
+Example:
 
     {"sub": "thanks for trying mqtt2chrome","txt":"Check out more at http://twitter.com/bordignon","img":"alert.png"}
 
 ![message](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/message.png)
-      
-##Todo/fix;
-  * fix the notification history so you can open older ones. 
+
+##Todo/fix
+
+  * fix the notification history so you can open older ones.
   * add the settings to another page, so you don't have to edit this page

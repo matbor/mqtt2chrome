@@ -1,0 +1,101 @@
+<!-- This is an options page for configuring MQTT2Chrome -->
+<html>
+  <head>
+    <title>MQTT2Chrome Extension Options</title>
+    <style>
+      body {
+        font-family: arial, helvetica, sans-serif;
+      }
+      .banner {
+        width: 100%;
+        float: left;
+      }
+      .banner_left {
+        padding: 8px;
+        float: left;
+      }
+      .banner_right {
+        padding: 8px;
+      }
+      .ctrl_label {
+        width: 200px;
+        float: left;
+      }
+      .ctrl_wrap {
+        margin: 18px 8px;
+      }
+      .ctrl {
+        width: 200px;
+      }
+      #defaults {
+        margin-left: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <div class="banner_left">
+        <img src="icon.png" alt="">
+      </div>
+      <div class="banner_right">
+        <h1>MQTT2Chrome Options</h1>
+      </div>
+      <p>The extension connects to a MQTT broker, subscribes to a topic and displays any received messages as Chrome notifications.</p>
+    </div>
+
+    <div>
+      <div class="ctrl_label">
+        <label>Broker:</label>
+      </div>
+      <div class="ctrl_wrap">
+        <input id="broker" class="ctrl" type="text" size="40" style="text-align:right">
+      </div>
+
+      <div class="ctrl_label">
+        <label>Port:</label>
+      </div>
+      <div class="ctrl_wrap">
+        <input id="port" class="ctrl" type="text" size="10" style="text-align:right">
+      </div>
+
+      <div class="ctrl_label">
+        <label>Reconnect Timeout (s):</label>
+      </div>
+      <div class="ctrl_wrap">
+        <input id="reconnectTimeout" class="ctrl" type="text" size="10" style="text-align:right">
+      </div>
+
+      <div class="ctrl_label">
+        <label>Subtopic:</label>
+      </div>
+      <div class="ctrl_wrap">
+        <input id="subtopic" class="ctrl" type="text" size="40" style="text-align:right">
+      </div>
+
+      <div class="ctrl_label">
+        <label>Timeout Notifications:</label>
+      </div>
+      <div class="ctrl_wrap">
+        <input id="clearNotifications" class="ctrl" type="checkbox" checked>
+      </div>
+
+      <div class="ctrl_label">
+        <label>Notification Timeout (s):</label>
+      </div>
+      <div class="ctrl_wrap">
+        <input id="notificationTimeout" class="ctrl" type="text" size="40" style="text-align:right">
+      </div>
+
+
+      <div class="ctrl_label">
+        &nbsp;
+      </div>
+      <div class="ctrl_wrap">
+        <button id="save">Save &amp; Close</button>
+      </div>
+
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
