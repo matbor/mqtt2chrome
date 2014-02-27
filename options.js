@@ -23,6 +23,8 @@ function resetOptions()
 {
   localStorage.broker = "test.mosquitto.org";       // broker websocket address
   localStorage.port = 80;                           // broker websocket port
+  localStorage.username = "";                       // broker username, leave blank for none
+  localStorage.password = "";                       // broker password, leave blank for none  
   localStorage.subtopic = "/mqtt2chrome/messages";  // topic to subscribe to
   localStorage.reconnectTimeout = 10;               // Clear notifications after this many seconds
   localStorage.clearNotifications = true;           // Enable automatic clearing of notifications
@@ -42,6 +44,8 @@ function restoreOptions()
   console.log("retrieving options from local storage");
   document.getElementById("broker").value = localStorage.broker;
   document.getElementById("port").value = localStorage.port;
+  document.getElementById("username").value = localStorage.username;
+  document.getElementById("password").value = localStorage.password;
   document.getElementById("reconnectTimeout").value = localStorage.reconnectTimeout;
   document.getElementById("subtopic").value = localStorage.subtopic;
   document.getElementById("clearNotifications").checked = JSON.parse(localStorage.clearNotifications);
@@ -65,6 +69,8 @@ function saveOptions()
 
   localStorage.broker = document.getElementById("broker").value;
   localStorage.port = document.getElementById("port").value;
+  localStorage.username = document.getElementById("username").value;
+  localStorage.password = document.getElementById("password").value;
   localStorage.reconnectTimeout = document.getElementById("reconnectTimeout").value;
   localStorage.subtopic = document.getElementById("subtopic").value;
   localStorage.clearNotifications = document.getElementById("clearNotifications").checked;
@@ -78,6 +84,7 @@ function saveAndClose()
   chrome.tabs.getSelected(null, function(tab) {
     chrome.tabs.remove(tab.id);
   });
+  //disconenct and re-connect with new settings
 }
 
 function init()

@@ -18,7 +18,7 @@
         padding: 8px;
       }
       .ctrl_label {
-        width: 200px;
+        width: 300px;
         float: left;
       }
       .ctrl_wrap {
@@ -40,12 +40,12 @@
       <div class="banner_right">
         <h1>MQTT2Chrome Options</h1>
       </div>
-      <p>The extension connects to a MQTT broker, subscribes to a topic and displays any received messages as Chrome notifications.</p>
+      <p>The extension connects to a MQTT broker (that has websockets enabled), subscribes to a topic and displays any received messages as Chrome notifications.</p>
     </div>
 
     <div>
       <div class="ctrl_label">
-        <label>Broker:</label>
+        <label>MQTT Broker:</label>
       </div>
       <div class="ctrl_wrap">
         <input id="broker" class="ctrl" type="text" size="40" style="text-align:right">
@@ -56,6 +56,20 @@
       </div>
       <div class="ctrl_wrap">
         <input id="port" class="ctrl" type="text" size="10" style="text-align:right">
+      </div>
+
+      <div class="ctrl_label">
+        <label>Broker Username: (leave blank for none)</label>
+      </div>
+      <div class="ctrl_wrap">
+        <input id="username" class="ctrl" type="text" size="10" style="text-align:right">
+      </div>
+
+      <div class="ctrl_label">
+        <label>Broker Password: (leave blank for none)</label>
+      </div>
+      <div class="ctrl_wrap">
+        <input id="password" class="ctrl" type="text" size="10" style="text-align:right">
       </div>
 
       <div class="ctrl_label">
@@ -86,7 +100,7 @@
         <input id="notificationTimeout" class="ctrl" type="text" size="40" style="text-align:right">
       </div>
 
-
+NOTE: If you have changed any of the broker settings, after clicking Save&Close, click the mqtt icon in the task bar above to re-connect to the new broker.
       <div class="ctrl_label">
         &nbsp;
       </div>

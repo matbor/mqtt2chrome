@@ -45,10 +45,12 @@ if (!localStorage.isInitialized)
   // Initialize extension options to sane default values.
   localStorage.broker = "test.mosquitto.org";       // broker websocket address
   localStorage.port = "80";                         // broker websocket port
+  localStorage.username = "";                       // broker username, leave blank for none
+  localStorage.password = "";                       // broker password, leave blank for none  
   localStorage.subtopic = "/mqtt2chrome/messages";  // subtopic to subscribe to
   localStorage.reconnectTimeout = "10";             // Reconnect to broker after this many seconds
   localStorage.clearNotifications = true;           // Enable automatic clearing of notifications
-  localStorage.notificationTimeout = "10";          // Automatically clear notifications after this many seconds
+  localStorage.notificationTimeout = "1800";          // Automatically clear notifications after this many seconds
   localStorage.isInitialized = true;                // Only initialise once
 
   chrome.tabs.create({url: chrome.extension.getURL('options.html')});
@@ -66,7 +68,11 @@ function connect()
                                 clientId);
   client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
-  client.connect({onSuccess:onConnect});
+  client.connect({
+    userName:localStorage.username,
+    password:localStorage.password,
+    onSuccess:onConnect,
+  });
 }
 
 // Clear the popupNotification
@@ -134,7 +140,10 @@ function onConnectionLost(responseObject)
     console.log("Connection to broker lost:"+responseObject.errorMessage);
     chrome.browserAction.setIcon({path:"icon_noconnection.png"});
     popupNotification("MQTT Broker disconneced","Reason: "+responseObject.errorMessage,"icon_noconnection.png");
-    window.setTimeout(connect, parseInt(localStorage.reconnectTimeout, 10) * 1000); //wait X seconds before trying to connect again.
+    if (localStorage.reconnectTimeout !== 0)
+    {
+      window.setTimeout(connect, parseInt(localStorage.reconnectTimeout, 10) * 1000); //wait X seconds before trying to connect again.
+    }
   }
 };
 
@@ -169,6 +178,8 @@ chrome.browserAction.onClicked.addListener(function ()
   try
   {
     client.disconnect();
+    chrome.browserAction.setIcon({path:"icon_noconnection.png"});
+
   }
   catch (e)
   {
@@ -179,7 +190,7 @@ chrome.browserAction.onClicked.addListener(function ()
   // a very short delay. There is no need to wait for the time specified in
   // localStorage.reconnectTimeout as that is intended to be used for normal
   // runtime intermittant connectivity issues.
-  window.setTimeout(connect, 1000);
+  window.setTimeout(connect, 2000);
 });
 
 
