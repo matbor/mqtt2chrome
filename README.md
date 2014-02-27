@@ -9,9 +9,11 @@ You can do what you want with the code as long as you provide attribution back t
 
 This extension connects to a MQTT broker using websockets and displays any received messages using Chrome's built-in notifications function.
 
-Requires "notifications" permission.
+Requires chrome "notifications" permission.
 
 Tested on Windows, Linux and OSX.
+
+Currently doesn't support TLS/username/password for MQTT, will except pull requests for it.
 
 *Screenshot of what the notification looks like. Observe the notification box in bottom right and also the connection icon near the address bar. The connection icon will change if the connection is lost.*
 ![notification box](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/message%20recieved.png)
