@@ -13,7 +13,7 @@ Requires chrome "notifications" permission.
 
 Tested on Windows, Linux and OSX.
 
-Currently doesn't support TLS, will except pull requests for it. It does however support username/password, but until I fix it the password is not stored in the localstorage in an encrypted  format. (ie. it is stored in clear text! You have been warned.)
+Currently doesn't support TLS, will except pull requests for it. It does however support username/password, but until I fix it the password is stored in the extenstions localstorage but in an unencrypted format. (ie. it is stored in clear text! You have been warned.)
 
 *Screenshot of what the notification looks like. Observe the notification box in bottom right and also the connection icon near the address bar. The connection icon will change if the connection is lost.*
 ![notification box](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/message%20recieved.png)
