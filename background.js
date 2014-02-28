@@ -68,11 +68,18 @@ function connect()
                                 clientId);
   client.onConnectionLost = onConnectionLost;
   client.onMessageArrived = onMessageArrived;
-  client.connect({
-    userName:localStorage.username,
-    password:localStorage.password,
-    onSuccess:onConnect,
-  });
+
+  var connectOptions = new Object();
+  connectOptions.useSSL = false;
+  connectOptions.cleanSession = true;
+  connectOptions.onSuccess = onConnect;
+  if (localStorage.username != "") {
+    connectOptions.userName = localStorage.username;
+  }
+  if (localStorage.password != "") {
+    connectOptions.password = localStorage.password;
+  }
+  client.connect(connectOptions);
 }
 
 // Clear the popupNotification
