@@ -33,7 +33,7 @@ Currently doesn't support TLS, will except pull requests for it. It does however
 ![example of install](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/howto%20load.png)
 
 
-##Optional
+##Optional-1
 
 This extension expects to receive a specific JSON formatted message payload:
 
@@ -51,3 +51,8 @@ Example:
 
 ![message](https://raw.github.com/matbor/mqtt2chrome/master/screenshots/message.png)
 
+##Optional-2
+Check out the following projects that this works well with;
+* https://github.com/matbor/twitter2mqtt
+* https://github.com/jpmens/mqttwarn  <-- HIGHLY recommend!
+* https://github.com/openhab/openhab/
