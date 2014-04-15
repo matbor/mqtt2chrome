@@ -23,7 +23,7 @@ Currently doesn't support TLS, will except pull requests for it. It does however
 
 **Option-A**
 
-We are now in the 'chrome web store'. Simply visit the chrome webstore and search for mqtt2chrome
+We are now in the 'chrome web store'. Simply visit the chrome webstore and search for mqtt2chrome [or click here](https://chrome.google.com/webstore/detail/mqtt2chrome/jfcmchhmjkddfoekjbkljcfpdjnpailh)
 
 
 **Option-B** *(Below is if you are running from the source from github)*
