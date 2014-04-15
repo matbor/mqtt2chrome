@@ -21,6 +21,10 @@ Currently doesn't support TLS, will except pull requests for it. It does however
 
 ##Installation
 
+*Option-A*
+We are now in the 'chrome web store'. Simply visit the chrome webstore and search for mqtt2chrome
+
+*Option-B* **(Below is if you are running from the source from github)**
 1. Download all the files to a directory.
 2. In Chrome, goto Tools -> Extenstions.
 3. Tick the 'Developer mode' box, then click 'Load unpacked extension...'
@@ -54,5 +58,5 @@ Example:
 ##Optional-2
 Check out the following projects that this works well with;
 * https://github.com/matbor/twitter2mqtt
-* https://github.com/jpmens/mqttwarn  <-- HIGHLY recommend!
+* https://github.com/jpmens/mqttwarn  <<< HIGHLY recommend!
 * https://github.com/openhab/openhab/
