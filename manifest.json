@@ -1,6 +1,6 @@
 {
   "name": "mqtt2chrome",
-  "version": "4",
+  "version": "4.0.1",
   "description":
     "Displays MQTT messages as Chrome notifications, using MQTT over websockets",
   "icons": {"16": "icon.png", "48": "icon.png", "128": "icon.png"},
