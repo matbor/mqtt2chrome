@@ -31,11 +31,6 @@
 // This variable is used when generating unique notification identifiers.
 var notificationId = 0;
 
-if (window.localStorage == null) {
-  alert("LocalStorage must be enabled to store MQTT2Chrome options.");
-  return;
-}
-
 /*
 Conditionally initialize the options to reasonable defaults and
 open the options in a new tab for the user to configure appropriately.
