@@ -1,6 +1,6 @@
 /*
   by @bordignon
-  October 2013
+  October 2013-2015
   You can do what you want with the code as long as you provide attribution
   back to me and don't hold me liable.
 
@@ -10,34 +10,34 @@
 
   This extension expects to receive a specific JSON payload formatted as
   follows:
-      { "sub": "", "txt": "", "img": ""}
+      { "sub": "", "txt": "", "img": "", "url":"" }
   Where:
       'sub' represents the notification heading used in the notification.
       'txt' represents the text used in the notification.
-      'img' represents the image filename from within the thumbnails directory.
-      For example; alert.png, warning.png, etc.
+      'img' optional; lets you have a thumbnail for the notification. For example; alert.png, warning.png, etc.
+      'url' optional; http web link
 
   This extension requires "notifications" permission.
 
   Changelog:
   v4 -- Jan 2014 -- upgraded to newer chrome notifications, removed webkit
   support.
+  v4.2 -- fixed url's when you click on a message also added a url parameter to the json messages
 
-  Todo:
-   * fix the notification history so you can open older messages with URL's,
-     currently will only open current messages
+todo;
+  - thumbnails directory, once you make the extension and publish it you can't add any new icons.
 */
 
 // This variable is used when generating unique notification identifiers.
 var notificationId = 0;
-
+var urls = {};
 /*
 Conditionally initialize the options to reasonable defaults and
 open the options in a new tab for the user to configure appropriately.
 */
 if (!localStorage.isInitialized)
 {
-  // Initialize extension options to sane default values.
+  // Initialize extension options to sone default values.
   localStorage.broker = "test.mosquitto.org";       // broker websocket address
   localStorage.port = "80";                         // broker websocket port
   localStorage.username = "";                       // broker username, leave blank for none
@@ -47,7 +47,6 @@ if (!localStorage.isInitialized)
   localStorage.clearNotifications = true;           // Enable automatic clearing of notifications
   localStorage.notificationTimeout = "1800";          // Automatically clear notifications after this many seconds
   localStorage.isInitialized = true;                // Only initialise once
-
   chrome.tabs.create({url: chrome.extension.getURL('options.html')});
 }
 
@@ -93,7 +92,8 @@ function clearedCallback(wasCleared) {
 }
 
 // create the popupNotification in Chrome
-function popupNotification(poptitle, popmessage, popicon)
+function popupNotification(poptitle, popmessage, popicon, popurl)
+
 {
   options = {
     type : "basic",
@@ -103,7 +103,12 @@ function popupNotification(poptitle, popmessage, popicon)
     priority: 2
   };
   var n_id = "id" + notificationId++;
+  
   chrome.notifications.create(n_id, options, createdCallback);
+  
+  //add the url to the array.
+  //if(typeof popurl === 'undefined'){ popurl = 'http://google.com' };
+  urls[n_id] = popurl;
 
   if (JSON.parse(localStorage.clearNotifications))
   {
@@ -158,11 +163,32 @@ function onMessageArrived(message) {
   try
   {
     var msg = JSON.parse(message.payloadString);
+    var thumbnail;
+    var url;
     //console.log(msg.sub);
     //console.log(msg.txt);
     //console.log(msg.img);
-    var thumbnail = 'thumbnails/' + msg.img;
-    popupNotification(msg.sub,msg.txt,thumbnail);
+    //console.log(msg.url);
+    
+    // checking to see if the url json object is there first    
+    if(!(msg.hasOwnProperty('url')) || msg.url == "") 
+    {
+      console.log('we don\'t have a url');
+      url = null;
+    } 
+    // checking to see if the img json object is there
+    if(!(msg.hasOwnProperty('img')) || msg.img == "") 
+    {
+      console.log('we don\'t have a img');
+      thumbnail = "icon.png"; //default icon
+    } 
+    else if (msg.hasOwnProperty('img'))
+    {
+      thumbnail = 'thumbnails/' + msg.img;
+    }
+      // create the pop
+    popupNotification(msg.sub,msg.txt,thumbnail,msg.url);
+
   }
   catch (e)
   {
@@ -187,45 +213,27 @@ chrome.browserAction.onClicked.addListener(function ()
   {
     console.log(e);
   };
-
-  // Clicking the button is a explicit user action, so reconnect after only
-  // a very short delay. There is no need to wait for the time specified in
-  // localStorage.reconnectTimeout as that is intended to be used for normal
-  // runtime intermittant connectivity issues.
   window.setTimeout(connect, 2000);
 });
 
+//open the url in a new tab
+function notificationClicked(id) {
+  console.log("The notification '" + id + "' was clicked" );
+  if(!(typeof urls[id] === 'undefined'))
+    {
+      chrome.tabs.create({url: urls[id]});
+    };
+}
 
-//we use this regex to find the http in a message, so we can display it
-String.prototype.parseURL = function() {
-  return this.match(/\(?(?:(http|https|ftp):\/\/)?(?:((?:[^\W\s]|\.|-|[:]{1})+)@{1})?((?:www.)?(?:[^\W\s]|\.|-)+[\.][^\W\s]{2,4}|localhost(?=\/)|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::(\d*))?([\/]?[^\s\?]*[\/]{1})*(?:\/?([^\s\n\?\[\]\{\}\#]*(?:(?=\.)){1}|[^\s\n\?\[\]\{\}\.\#]*)?([\.]{1}[^\s\?\#]*)?)?(?:\?{1}([^\s\n\#\[\]]*))?([\#][^\s\n]*)?\)?/gi, function(url) {
-    return url;
-  });
-};
-
-// this doesn't seem to be working with OLDER notifications, only works with ones that are just recieved
-// the idea is if you click on a notification and it has a URL in the message it will open the URL in a
-// new tab
-function notificationClicked(n_id) {
-  console.log("The notification '" + n_id + "' was clicked" );
-  console.log('Notification - title :'+options.title + ' |Message: '+options.message +options.notID);
-  var newURL = options.message.parseURL([0]);
-  var newURLstr = newURL.toString();
-  //console.log('parsed results: '+newURL);
-  //console.log('converted to string: '+newURLstr);
-
-  console.log(newURLstr.substring(0,4));
-  if (newURLstr.substring(0,4) == "http") {//test for http before opening new tab
-    console.log('http found, opening url in new tab: '+ newURLstr);
-    chrome.tabs.create({ url: newURLstr });
-  }
-  else{
-    console.log('no url to open, ignoring click');
-  }
+function notifyClose(id, byUser) {
+  // Clean up the matching
+  console.log("The notification '" + id + "' was cleaned up" );
+  delete urls[id];
 }
 
 window.addEventListener("load", function() {
   chrome.notifications.onClicked.addListener(notificationClicked);
+  chrome.notifications.onClosed.addListener(notifyClose);
 });
 
 //check notification permission is there before we connect to the broker

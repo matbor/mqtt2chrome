@@ -1,23 +1,23 @@
 {
-  "name": "mqtt2chrome",
-  "version": "4.0.1",
-  "description":
-    "Displays MQTT messages as Chrome notifications, using MQTT over websockets",
-  "icons": {"16": "icon.png", "48": "icon.png", "128": "icon.png"},
-  "browser_action": {
-    "default_title": "MQTT2Chrome",
-    "default_icon": "icon_noconnection.png"
-  },
-  "permissions": [
-    "notifications"
-  ],
-  "background": { "scripts": [
-    "mqttws31.js","background.js"
-    ]
-    },
-  "manifest_version": 2,
-  "options_page": "options.html",
-  "web_accessible_resources": [
-    "icon.png"
-  ]
+   "background": {
+      "scripts": [ "mqttws31.js", "background.js" ]
+   },
+   "browser_action": {
+      "default_icon": "icon_noconnection.png",
+      "default_title": "MQTT2Chrome"
+   },
+   "description": "Displays MQTT messages as Chrome notifications, using MQTT over websockets",
+   "icons": {
+      "128": "icon.png",
+      "16": "icon.png",
+      "48": "icon.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgj+bjwe897ZezvW3Ht2L/sxYwtRftLmCghq32059/LYgRtgmkmvr2kfAgBxwYZpkkrC91kHvTDlUHSDw/PXyBky00Qf6jvWGdV4avwAQ4kNB/R3kFsxGtxlGKnapz7x4elWpF2NatEXRvhhAqupzdNc/RkTpwTSXOQWzp4NYQNS41yWBc29smGzUo6xk2E5UZPxXUTzxLIJEak1G8CRfcB/FeEQB7ho99+inL3zI0xRTtMKMgkbUGqtSW7FZWiW/UTGqBXUv2TCRlDEOZuiIOcqGD5U63DtWvIOPT+6FvMEf7KBUhVQafE1Dael3OKSioPlwt9BZ/pviFWuhqkm2rQIDAQAB",
+   "manifest_version": 2,
+   "name": "mqtt2chrome",
+   "options_page": "options.html",
+   "permissions": [ "notifications" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "4.2",
+   "web_accessible_resources": [ "icon.png" ]
 }
