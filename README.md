@@ -1,6 +1,10 @@
 mqtt2chrome
 ===========
 
+--
+Please NOTE this extension isn't maintained anymore, please use at own risk.
+--
+
 by @bordignon, and with help from @clawsicus
 
 You can do what you want with the code as long as you provide attribution back to me and don’t hold me liable!
